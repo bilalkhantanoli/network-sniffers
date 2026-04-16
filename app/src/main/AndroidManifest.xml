@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+<!--  Core permissions for network monitoring  -->
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+<!--  For getting installed apps  -->
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+<!--  Optional: For app usage stats  -->
+<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"/>
+<!--  For writing logs to external storage  -->
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
+<application android:allowBackup="true" android:dataExtractionRules="@xml/data_extraction_rules" android:fullBackupContent="@xml/backup_rules" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/Theme.NetworkSniffer" android:usesCleartextTraffic="true" tools:targetApi="31">
+<!--  Main Activity - App Selection Screen  -->
+<activity android:name=".MainActivity" android:exported="true" android:theme="@style/Theme.NetworkSniffer" android:label="@string/app_name" android:screenOrientation="portrait">
+<intent-filter>
+<action android:name="android.intent.action.MAIN"/>
+<category android:name="android.intent.category.LAUNCHER"/>
+</intent-filter>
+</activity>
+<!--  Traffic Detail Activity - Network Inspector  -->
+<activity android:name=".TrafficDetailActivity" android:exported="true" android:theme="@style/Theme.NetworkSniffer" android:label="Network Inspector" android:screenOrientation="portrait"/>
+<!--  System Proxy Service - Intercepts HTTP/HTTPS traffic  -->
+<service android:name=".SystemProxyService" android:exported="false" android:description="@string/proxy_service_description"/>
+<!--  Network Monitoring Service - Central storage for requests  -->
+<service android:name=".NetworkMonitoringService" android:exported="false" android:description="@string/monitoring_service_description"/>
+</application>
+<!--  Required for Android 10+ cleartext traffic handling  -->
+<!--  This allows intercepting unencrypted HTTP traffic  -->
+<uses-feature android:name="android.hardware.telephony" android:required="false"/>
+</manifest>

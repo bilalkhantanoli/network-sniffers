@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NetworkSniffer</string>
+    <string name="proxy_service_description">Local proxy service for capturing network traffic</string>
+    <string name="monitoring_service_description">Stores captured network requests for the inspector UI</string>
+</resources>
